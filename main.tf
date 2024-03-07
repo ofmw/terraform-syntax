@@ -13,6 +13,12 @@ provider "aws" {
 }
 
 #Module
+#DEV
 module "def-custom-vpc" {
+  source = "./custom_vpc"
+}
+
+#PRD
+module "prd-custom-vpc" {
   source = "./custom_vpc"
 }
