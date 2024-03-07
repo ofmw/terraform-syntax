@@ -39,21 +39,21 @@ resource "aws_subnet" "pub-sub-c" {
   }
 }
 
-#Create Private Subnet
-resource "aws_subnet" "pvt-sub-a" {
-  vpc_id            = aws_vpc.def-vpc.id
-  cidr_block        = "10.10.13.0/24"
-  availability_zone = "us-east-1a"
-  tags = {
-    Name = "tf-pvt-sub-a"
-  }
-}
+# #Create Private Subnet
+# resource "aws_subnet" "pvt-sub-a" {
+#   vpc_id            = aws_vpc.def-vpc.id
+#   cidr_block        = "10.10.13.0/24"
+#   availability_zone = "us-east-1a"
+#   tags = {
+#     Name = "tf-pvt-sub-a"
+#   }
+# }
 
-resource "aws_subnet" "pvt-sub-c" {
-  vpc_id            = aws_vpc.def-vpc.id
-  cidr_block        = "10.10.14.0/24"
-  availability_zone = "us-east-1c"
-  tags = {
-    Name = "tf-pvt-sub-c"
-  }
-}
+# resource "aws_subnet" "pvt-sub-c" {
+#   vpc_id            = aws_vpc.def-vpc.id
+#   cidr_block        = "10.10.14.0/24"
+#   availability_zone = "us-east-1c"
+#   tags = {
+#     Name = "tf-pvt-sub-c"
+#   }
+# }
