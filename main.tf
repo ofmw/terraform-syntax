@@ -57,19 +57,3 @@ resource "aws_subnet" "pub-sub-c" {
 #     Name = "tf-pvt-sub-c"
 #   }
 # }
-
-#AWS Data
-# #Use Subnet ID
-# variable "subnet_id" {}
-
-# data "aws_subnet" "selected" {
-#   id = "subnet-046be8c7ff308b7e0"
-# }
-
-#Use Tag
-data "aws_subnet" "aws-pvt-sub-a" {
-  filter {
-    name   = "tag:Name"
-    values = ["aws-pvt-sub-a"]
-  }
-}
