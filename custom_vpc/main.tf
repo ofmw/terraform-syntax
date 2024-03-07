@@ -10,7 +10,7 @@ resource "aws_vpc" "def-vpc" {
 resource "aws_subnet" "pub-sub-a" {
   vpc_id            = aws_vpc.def-vpc.id
   cidr_block        = "10.10.11.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = local.az-a
   tags = {
     Name = "tf-${var.team-name}-pub-sub-a"
   }
@@ -29,7 +29,7 @@ resource "aws_subnet" "pub-sub-a" {
 resource "aws_subnet" "pvt-sub-a" {
   vpc_id            = aws_vpc.def-vpc.id
   cidr_block        = "10.10.13.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = local.az-a
   tags = {
     Name = "tf-${var.team-name}-pvt-sub-a"
   }

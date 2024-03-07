@@ -24,3 +24,8 @@ module "prd-custom-vpc" {
   source    = "./custom_vpc"
   team-name = "prd"
 }
+
+# resource "test_instance" "x" {
+#   prd_vpc_id = module.def-custom-vpc.id
+#   dev_vpc_id = module.prd-custom-vpc.id
+# }
