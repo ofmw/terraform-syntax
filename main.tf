@@ -36,7 +36,8 @@ variable "names" {
 }
 
 module "personal-custom-vpc" {
-  for_each  = toset(var.names)
+  # for_each  = toset(var.names)
+  for_each  = toset([for s in var.names : "${s}-test"])
   source    = "./custom_vpc"
   team-name = "personal-${each.key}"
 }
