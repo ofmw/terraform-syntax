@@ -13,19 +13,34 @@ provider "aws" {
 }
 
 #Module
-#DEV
-module "def-custom-vpc" {
-  source    = "./custom_vpc"
-  team-name = "dev"
-}
+# #DEV
+# module "def-custom-vpc" {
+#   source    = "./custom_vpc"
+#   team-name = "dev"
+# }
 
-#PRD
-module "prd-custom-vpc" {
-  source    = "./custom_vpc"
-  team-name = "prd"
-}
+# #PRD
+# module "prd-custom-vpc" {
+#   source    = "./custom_vpc"
+#   team-name = "prd"
+# }
 
 # resource "test_instance" "x" {
 #   prd_vpc_id = module.def-custom-vpc.id
 #   dev_vpc_id = module.prd-custom-vpc.id
 # }
+
+variable "names" {
+  type    = list(string)
+  default = ["son", "park"]
+}
+
+module "personal-custom-vpc" {
+  for_each  = toset(var.names)
+  source    = "./custom_vpc"
+  team-name = "personal-${each.key}"
+}
+
+output "vpc-id" {
+  value = [for vpc in module.personal-custom-vpc : vpc.vpc_id]
+}
