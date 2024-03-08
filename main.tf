@@ -43,5 +43,5 @@ module "personal-custom-vpc" {
 }
 
 output "vpc-id" {
-  value = [for vpc in module.personal-custom-vpc : vpc.vpc_id]
+  value = [for vpc in module.personal-custom-vpc : vpc.vpcId]
 }
