@@ -5,6 +5,12 @@ terraform {
       version = "5.39.1" #버전은 직접 명시하는게 좋다.
     }
   }
+  backend "s3" {
+    bucket = "tf-backend-01-202403081122"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+    # dynamodb_table = "tf-lock"
+  }
 }
 
 # Configure AWS Provider
@@ -76,3 +82,14 @@ resource "aws_s3_bucket_versioning" "tf-backend-ver" {
     status = "Enabled"
   }
 }
+
+# # Set DynamoDB Table
+# resource "aws_dynamodb_table" "tf-backend-dtb" {
+#   name         = "tf-lock"
+#   hash_key     = "LockID"
+#   billing_mode = "PAY_PER_REQUEST"
+#   attribute {
+#     name = "LockID"
+#     type = "S"
+#   }
+# }
