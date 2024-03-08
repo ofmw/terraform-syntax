@@ -8,7 +8,7 @@ resource "aws_vpc" "def-vpc" {
 
 # Create Public Subnet
 resource "aws_subnet" "pub-sub-a" {
-  count             = var.team-name == "dev" ? 1 : 0
+  count             = var.team-name == "default" ? 1 : 0
   vpc_id            = aws_vpc.def-vpc.id
   cidr_block        = "10.10.11.0/24"
   availability_zone = local.az-a
