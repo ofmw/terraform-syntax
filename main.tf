@@ -45,3 +45,34 @@ module "vpc-list" {
 output "vpc-id" {
   value = [for vpc in module.vpc-list : vpc.vpcId]
 }
+
+# Create S3 Bucket
+resource "aws_s3_bucket" "tf-backend" {
+  bucket = "tf-backend-01-202403081122"
+  tags = {
+    Name = "tf-backend-01"
+  }
+}
+
+# Create S3 Bucket Ownership Controls
+resource "aws_s3_bucket_ownership_controls" "tf-backend-own" {
+  bucket = aws_s3_bucket.tf-backend.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+# Set S3 Bucket ACL
+resource "aws_s3_bucket_acl" "tf-backend-acl" {
+  depends_on = [aws_s3_bucket_ownership_controls.tf-backend-own]
+  bucket     = aws_s3_bucket.tf-backend.id
+  acl        = "private"
+}
+
+# Set S3 Bucket Versioning
+resource "aws_s3_bucket_versioning" "tf-backend-ver" {
+  bucket = aws_s3_bucket.tf-backend.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}

@@ -69,12 +69,12 @@ resource "aws_internet_gateway" "def-igw" {
   }
 }
 
-# Create NAT Gatway
-resource "aws_nat_gateway" "pvt-ngw-a" {
-  count             = var.team-name == "dev" ? 1 : 0
-  connectivity_type = "private"
-  subnet_id         = aws_subnet.pub-sub-a[0].id
-  tags = {
-    Name = "tf-${var.team-name}-pvt-ngw-a"
-  }
-}
+# # Create NAT Gatway
+# resource "aws_nat_gateway" "pvt-ngw-a" {
+#   count             = var.team-name == "dev" ? 1 : 0
+#   connectivity_type = "private"
+#   subnet_id         = aws_subnet.pub-sub-a[0].id
+#   tags = {
+#     Name = "tf-${var.team-name}-pvt-ngw-a"
+#   }
+# }
