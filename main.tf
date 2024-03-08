@@ -30,18 +30,18 @@ provider "aws" {
 #   dev_vpc_id = module.prd-custom-vpc.id
 # }
 
-variable "names" {
+variable "envs" {
   type    = list(string)
-  default = ["son", "park"]
+  default = ["dev", "prd", ""]
 }
 
-module "personal-custom-vpc" {
+module "vpc-list" {
   # for_each  = toset(var.names)
-  for_each  = toset([for s in var.names : "${s}-test"])
+  for_each  = toset([for s in var.envs : s if s != ""])
   source    = "./custom_vpc"
-  team-name = "personal-${each.key}"
+  team-name = each.key
 }
 
 output "vpc-id" {
-  value = [for vpc in module.personal-custom-vpc : vpc.vpcId]
+  value = [for vpc in module.vpc-list : vpc.vpcId]
 }
