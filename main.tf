@@ -93,3 +93,13 @@ resource "aws_s3_bucket_versioning" "tf-backend-ver" {
 #     type = "S"
 #   }
 # }
+
+resource "aws_eip" "eip-test" {
+  tags = {
+    Name = "eip-test-01"
+  }
+}
+
+output "eip-ip" {
+  value = aws_eip.eip-test.public_ip
+}
